@@ -20,6 +20,9 @@ const Preview = (props) => {
    * 
    * It has to be defined inside the Preview component to have access to setIsLoading, setSearchResults, etc...
    */
+
+  const {setSearchResults, setFeaturedResult, setIsLoading} = props;
+  const {info, records} = props.searchResults;
   async function fetchPage(pageUrl) {
     setIsLoading(true);
 
@@ -37,14 +40,18 @@ const Preview = (props) => {
     <header className="pagination">
       {/* This button should be disabled if nothing is set in info.prev, and should call fetchPage with info.prev when clicked */}
       <button 
-        disabled={} 
+        disabled={!info.prev}
         className="previous"
-        onClick={}>Previous</button>
+        onClick={()=> {
+          fetchPage(info.prev);
+        }}>Previous</button>
       {/* This button should be disabled if nothing is set in info.next, and should call fetchPage with info.next when clicked */}
       <button
-        disabled={}
+        disabled={!info.next} 
         className="next"
-        onClick={}>Next</button>
+        onClick={()=>{
+          fetchPage(info.next);
+        }}>Next</button>
     </header>
     <section className="results">
       {
@@ -65,6 +72,15 @@ const Preview = (props) => {
           </div>
         */
       }
+      {records.map((record, index) => (
+          <div key={index} className='object-preview' onClick={(event) => {
+            event.preventDefault();
+            setFeaturedResult(record);
+          }}>
+            {record.primaryimageurl ? <img src={record.primaryimageurl} alt = {record.description} /> : <h3>NO IMAGE INCLUDED</h3> }
+            {record.title ? <h3>{record.title}</h3> : <h3>INFO MISSING</h3>}
+          </div>
+      ))}
     </section>
   </aside>
 }

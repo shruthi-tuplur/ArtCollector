@@ -12,3 +12,8 @@ import React from 'react';
  *   </h5>
  * </div>
  */
+ const Title = () => {
+
+}
+
+export default Title;

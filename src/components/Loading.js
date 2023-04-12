@@ -1,5 +1,10 @@
 import React from 'react';
 
+const Loading = () => {
+
+}
+
+export default Loading;
 /**
  * Create and export a component called Loading which uses this static HTML template:
  * 
