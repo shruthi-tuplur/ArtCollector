@@ -32,7 +32,7 @@ const Search = (props) => {
    */
   useEffect(() => {
     Promise.all([fetchAllCenturies(), fetchAllClassifications()]).then((returnedLists) => {
-      console.log(returnedLists);
+      
       setCenturyList(returnedLists[0]);
       setClassificationList(returnedLists[1]);
 

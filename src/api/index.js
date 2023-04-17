@@ -44,14 +44,14 @@ export async function fetchQueryResults({
   classification,
   queryString,
 }) {
-  console.log(century, classification, queryString);
+  
   const url = `${ BASE_URL }/object?${ KEY }&classification=${ classification }&century=${ 
     century }&keyword=${ queryString }`;
 
   try {
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data);
+    
 
     return data;
   } catch (error) {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Search, Preview } from './components';
+import { Search, Preview, Feature, Loading } from './components';
 
 // These imports won't work until you fix ./components/index.js
 /* import {
@@ -20,7 +20,10 @@ const App = () => {
     {/* <Title /> is static, doesn't need any props */}
     {//<Title />
     }
-    
+    <div id='site-header-div'>
+      <h1 id='site-header'>The Art Collector</h1>
+      <h3 id='site-header-subtitle'>Search the Harvard Art Museum's Private Collections</h3>
+    </div>
     {/* <Search /> needs props for setIsLoading and setSearchResults (trigger <Loading /> on search start/end, and transfer results to preview) */}
     <Search setIsLoading={setIsLoading} setSearchResults = {setSearchResults}/>
     
@@ -28,12 +31,12 @@ const App = () => {
     <Preview searchResults = {searchResults} setSearchResults = {setSearchResults} setIsLoading = {setIsLoading} setFeaturedResult = {setFeaturedResult} />
     
     {/* <Feature /> needs props for featuredResult, as well as setIsLoading and setSearchResults (clicking on searchable properties) */}
-    {//<Feature />
-    }
+    <Feature  featuredResult = {featuredResult} setIsLoading = {setIsLoading} setSearchResults={setSearchResults}/>
+    
     {/* <Loading /> is static, but should only render when isLoading is true */}
-    {//<Loading />
-    }
-   {/* use a ternary and render null if isLoading is false */}
+    
+    
+   {!isLoading ? null : <Loading isLoading={isLoading} setIsLoading = {setIsLoading}/> }
   </div>
 }
 

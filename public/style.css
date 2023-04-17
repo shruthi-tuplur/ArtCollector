@@ -11,12 +11,20 @@
   box-sizing: border-box;
 }
 
+
 body {
   height: 100vh;
+  
+}
+
+main {
+  display: flex;
+  flex-direction: column;
 }
 
 #app {
   height: 100%;
+  
 }
 
 .app {
@@ -104,6 +112,13 @@ body {
   font-weight: normal;
 }
 
+#feature-header {
+background-color: steelblue;
+padding: 15px;
+margin-bottom: 10px;
+color: white;
+}
+
 #search input,
 #search button {
   padding: 4px 8px;
@@ -133,6 +148,7 @@ body {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
   overflow-y: hidden;
+
 }
 
 #preview .pagination {
@@ -195,7 +211,67 @@ body {
 }
 
 .object-feature {
-  flex-grow: 1;
+  display: flex;
+  overflow: scroll;
+  align-content: center;
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+}
+
+.featured-photo {
+  max-width: 500px;
+  max-height: 500px; 
+  padding-right: 5px;
+}
+
+.feature-layout {
+  display: flex;
+  flex-direction: row;
+}
+
+.facts {
+  display: flex;
+  margin: 25px;
+  
+  height: 70vh;
+  flex-direction: column;
+  
+}
+
+#site-header-div {
+  display: flex;
+  width: 100vw;
+  flex-direction: column;
+  align-content: center;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  color: white;
+  background-color: steelblue;
+}
+
+#site-header {
+  text-align: center;
+  font-family: 'Great Vibes', cursive;
+}
+
+#site-header-subtitle {
+  text-align: center;
+  font-family: 'Vidaloka', serif;
+}
+
+
+#photo-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+}
+
+
+/* .object-feature {
 
   display: grid;
 
@@ -204,9 +280,9 @@ body {
 
   background: #fff;
   box-shadow: 0 4px 12px -3px black;
-}
+} */
 
-.object-feature > * {
+/* .object-feature > * {
   padding: 8px;
 }
 
@@ -260,8 +336,8 @@ body {
 }
 
 .object-feature img:not(:last-of-type) {
-  margin-bottom: 8px;
-}
+  margin-bottom: 8px; */
+/* } */
 
 #loading {
   position: fixed;

@@ -30,6 +30,25 @@ import { fetchQueryResultsFromTermAndValue } from '../api';
  *  - call setIsLoading, set it to false
  */
 const Searchable = (props) => {
+    const {searchTerm, searchValue, setIsLoading, setSearchResults} = props;
+    return(
+        <li className="content">
+            <a href="#" onClick={async (event) => {
+                event.preventDefault();
+                setIsLoading(true);
+
+                try{
+                    let result = await fetchQueryResultsFromTermAndValue(searchTerm, searchValue);
+                    setSearchResults(result);
+
+                } catch(error){
+                    console.error(error);
+                } finally {
+                    setIsLoading(false);
+                }
+            }}>{searchTerm.charAt(0).toUpperCase()}{searchTerm.substring(1)}: {searchValue}</a>
+        </li >
+    )
   
 }
 
@@ -68,7 +87,54 @@ const Searchable = (props) => {
  * This component should be exported as default.
  */
 const Feature = (props) => {
-
+    const {featuredResult, setIsLoading, setSearchResults} = props;
+    if(!featuredResult){
+        return null
+    } 
+    
+    const {title, dated, images, primaryimageurl, description, culture, style, technique, medium, dimensions, people, department, division, contact, creditline} = featuredResult;
+    return(
+        <main id="feature">
+            <header id='feature-header'>
+               <h3>{title}</h3>
+               <h4>{dated}</h4>
+             </header>
+          <div className="object-feature"> 
+            <div className='feature-layout'>             
+            <div id='facts-div'>
+                <section className="facts">
+                    <ul>
+                        {title && <li  className="title">Title: {title}</li >}
+                        {culture && <Searchable searchTerm = 'culture' searchValue = {culture} setIsLoading={setIsLoading} setSearchResults={setSearchResults}/>}
+                        {technique && <Searchable searchTerm = 'technique' searchValue = {technique} setIsLoading={setIsLoading} setSearchResults={setSearchResults}/>}
+                        {medium && <Searchable searchTerm = {medium.toLowerCase()} searchValue = {medium.toLowerCase()} setIsLoading={setIsLoading} setSearchResults={setSearchResults}/>}
+                        {people && people.map(person => {<Searchable searchTerm = 'displayname' searchValue = {person.displayname} setIsLoading={setIsLoading} setSearchResults={setSearchResults}/>})}
+                        {dated && <li  className="dated">Datee: {dated}</li>}
+                        {description && <li className="description">Description: {description}</li>}
+                        {dimensions && <li  className="dimensions">Dimensions: {dimensions}</li>}
+                        {department && <li  className="department">Department: {department}</li >}
+                        {division && <li  className="division">Division: {division}</li >}
+                        {contact && <li  className="contact">Contact: {contact}</li >}
+                        {creditline && <li  className="creditline">Credit: {creditline}</li >}
+               
+                    </ul>
+                 </section>
+                 </div>
+                 <div id='photo-div'>
+                 <section className="photos">
+                    {images && images.map((image) => {
+                        return <img key = {image.imageid} className='featured-photo' src={image.baseimageurl} alt='SOMETHING_WORTHWHILE' />
+                    })}
+                    
+                </section>
+                </div>
+                 </div>  
+                 
+             </div>
+            
+           
+        </main>
+    )
 }
 
 export default Feature;
